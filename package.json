@@ -1,18 +1,18 @@
 {
-  "name": "@sanity/scheduled-publishing",
+  "name": "@sanity/scheduled-unpublishing",
   "version": "1.3.0",
   "description": "",
   "keywords": [
     "sanity",
     "plugin"
   ],
-  "homepage": "https://github.com/sanity-io/sanity-plugin-scheduled-publishing#readme",
+  "homepage": "https://github.com/sanity-io/sanity-plugin-scheduled-unpublishing#readme",
   "bugs": {
-    "url": "https://github.com/sanity-io/sanity-plugin-scheduled-publishing/issues"
+    "url": "https://github.com/sanity-io/sanity-plugin-scheduled-unpublishing/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:sanity-io/sanity-plugin-scheduled-publishing.git"
+    "url": "git@github.com:sanity-io/sanity-plugin-scheduled-unpublishing.git"
   },
   "license": "MIT",
   "author": "Sanity.io <hello@sanity.io>",
@@ -114,5 +114,5 @@
     "access": "public",
     "provenance": true
   },
-  "sanityExchangeUrl": "https://www.sanity.io/plugins/scheduled-publishing"
+  "sanityExchangeUrl": "https://www.sanity.io/plugins/scheduled-unpublishing"
 }

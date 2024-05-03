@@ -1,5 +1,5 @@
-import {DocumentActionComponent} from 'sanity'
-import {ScheduleAction} from './documentActions/schedule'
+import { DocumentActionComponent } from 'sanity'
+import { ScheduleAction } from './documentActions/schedule'
 
 type Action = DocumentActionComponent
 
@@ -11,6 +11,7 @@ export default function resolveDocumentActions(existingActions: Action[]): Actio
   }
   return [
     ...existingActions.slice(0, index + 1),
+    ScheduleAction,
     ScheduleAction,
     ...existingActions.slice(index + 1),
   ]
