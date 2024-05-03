@@ -95,7 +95,7 @@ export const ScheduleAction = (props: DocumentActionProps): DocumentActionDescri
     createSchedule({date: formData.date, documentId: id}).then(onComplete)
   }, [createSchedule, formData?.date, id, onComplete])
 
-  const title = hasExistingSchedules ? 'Edit Schedule' : 'Schedule'
+  const title = hasExistingSchedules ? 'Edit Schedule test' : 'Schedule test'
 
   if (insufficientPermissions) {
     return {
