@@ -10,7 +10,7 @@ export default function resolveDocumentActions(props: DocumentActionProps): Acti
   // Add schedule action after default publish action
   return [
     // ...defaultActions.slice(0, 1), //
-    ScheduleAction,
+    // ScheduleAction,
     // ...defaultActions.slice(1),
   ]
 }
