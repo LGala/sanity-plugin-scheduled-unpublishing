@@ -16,11 +16,10 @@ export function NewScheduleInfo({id, schemaType}: Props) {
   return (
     <Stack space={4}>
       <Text size={1}>
-        Schedule this document to be published at any time in the future.
-        <br />
-        Any edits in the meantime will be added to the scheduled document.
+        Schedule this document to be published or unpublished at any time in the future. If one of
+        the two fields is missing the associated action will not be performed (for example if only
+        filling the "Publish at" field, the document won't be unpublished)
       </Text>
-      <Text size={1}>Visit the Schedules page to get an overview of all schedules.</Text>
       <ValidationWarning id={id} type={schemaType} />
     </Stack>
   )

@@ -68,7 +68,15 @@ export const scheduleCustomEvent = <
   }
 ): CustomEvent<D> => new CustomEvent(name, payload)
 
-function _create({date, documentId}: {date: string; documentId: string}) {
+function _create({
+  date,
+  documentId,
+  action,
+}: {
+  date: string
+  documentId: string
+  action: 'publish' | 'unpublish'
+}) {
   debug('_create:', documentId)
 
   // Round date to nearest second (mutate)
@@ -81,6 +89,7 @@ function _create({date, documentId}: {date: string; documentId: string}) {
       documents: [{documentId}],
       executeAt: roundedDate,
       name: roundedDate,
+      action,
     },
     method: 'POST',
     uri: getScheduleBaseUrl(),
@@ -132,13 +141,15 @@ export default function useScheduleOperation() {
     date,
     displayToast = true,
     documentId,
+    action = 'publish',
   }: {
     date: string
     displayToast?: boolean
     documentId: string
+    action?: 'publish' | 'unpublish'
   }) {
     try {
-      const data = await _create({date, documentId})
+      const data = await _create({date, documentId, action})
 
       window.dispatchEvent(
         scheduleCustomEvent(ScheduleEvents.create, {

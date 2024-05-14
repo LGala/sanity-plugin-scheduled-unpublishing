@@ -9,10 +9,11 @@ interface Props {
   markers?: ValidationMarker[]
   onChange?: (formData: ScheduleFormData) => void
   value?: ScheduleFormData | null
+  title?: string
 }
 
 const ScheduleForm = (props: Props) => {
-  const {customValidation, markers, onChange, value} = props
+  const {customValidation, markers, onChange, value, title = 'Date and time'} = props
 
   // Date input is stored locally to handle behaviour of the studio's `<LazyTextInput />` component.
   // If we don't keep this local state (and only rely on the canonical value of `ScheduleFormData`),
@@ -42,7 +43,7 @@ const ScheduleForm = (props: Props) => {
               dateFormat: `dd/MM/yyyy`,
               timeFormat: 'HH:mm',
             },
-            title: 'Date and time',
+            title,
           }}
           value={inputValue === undefined ? value?.date : inputValue}
         />

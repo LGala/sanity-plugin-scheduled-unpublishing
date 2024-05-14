@@ -58,7 +58,20 @@ export const ScheduleAction = (props: DocumentActionProps): DocumentActionDescri
   const hasFeature = useCheckFeature()
 
   const [dialogOpen, setDialogOpen] = useState(false)
-  const {customValidation, errors, formData, markers, onFormChange} = useScheduleForm()
+  const {
+    customValidation: publishEventCustomValidation,
+    errors: publishEventErrors,
+    formData: publishEventFormData,
+    markers: publishEventMarkers,
+    onFormChange: publishEventOnFormChange,
+  } = useScheduleForm()
+  const {
+    customValidation: unpublishEventCustomValidation,
+    errors: unpublishEventErrors,
+    formData: unpublishEventFormData,
+    markers: unpublishEventMarkers,
+    onFormChange: unpublishEventOnFormChange,
+  } = useScheduleForm()
 
   // Poll for document schedules
   const {
@@ -87,15 +100,20 @@ export const ScheduleAction = (props: DocumentActionProps): DocumentActionDescri
   }, [])
 
   const handleScheduleCreate = useCallback(() => {
-    if (!formData?.date) {
-      return
+    if (publishEventFormData?.date) {
+      createSchedule({date: publishEventFormData?.date, documentId: id}).then(onComplete)
     }
 
-    // Create schedule then close dialog
-    createSchedule({date: formData.date, documentId: id}).then(onComplete)
-  }, [createSchedule, formData?.date, id, onComplete])
+    if (unpublishEventFormData?.date) {
+      createSchedule({
+        date: unpublishEventFormData?.date,
+        documentId: id,
+        action: 'unpublish',
+      }).then(onComplete)
+    }
+  }, [createSchedule, publishEventFormData?.date, unpublishEventFormData?.date, id, onComplete])
 
-  const title = hasExistingSchedules ? 'Edit Schedule test' : 'Schedule test'
+  const title = hasExistingSchedules ? 'Edit Schedule' : 'Schedule'
 
   if (insufficientPermissions) {
     return {
@@ -140,21 +158,35 @@ export const ScheduleAction = (props: DocumentActionProps): DocumentActionDescri
           {hasExistingSchedules ? (
             <Schedules schedules={schedules} />
           ) : (
-            <EditScheduleForm
-              customValidation={customValidation}
-              markers={markers}
-              onChange={onFormChange}
-              value={formData}
-            >
+            <>
               <NewScheduleInfo id={id} schemaType={type} />
-            </EditScheduleForm>
+              <br />
+              <EditScheduleForm
+                customValidation={publishEventCustomValidation}
+                markers={publishEventMarkers}
+                onChange={publishEventOnFormChange}
+                value={publishEventFormData}
+                title="Publish at"
+              />
+              <br />
+              <EditScheduleForm
+                customValidation={unpublishEventCustomValidation}
+                markers={unpublishEventMarkers}
+                onChange={unpublishEventOnFormChange}
+                value={unpublishEventFormData}
+                title="Unpublish at"
+              />
+            </>
           )}
         </DocumentActionPropsProvider>
       ),
       footer: !hasExistingSchedules && (
         <DialogFooter
           buttonText="Schedule"
-          disabled={!formData?.date || errors.length > 0}
+          disabled={
+            (!publishEventFormData?.date || publishEventErrors.length > 0) &&
+            (!unpublishEventFormData?.date || unpublishEventErrors.length > 0)
+          }
           icon={ClockIcon}
           onAction={handleScheduleCreate}
           onComplete={onComplete}

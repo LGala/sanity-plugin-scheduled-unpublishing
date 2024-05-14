@@ -11,8 +11,8 @@ interface Props {
   value?: ScheduleFormData | null
 }
 
-export function EditScheduleForm(props: PropsWithChildren<Props>) {
-  const {customValidation, markers, onChange, value} = props
+export function EditScheduleForm(props: PropsWithChildren<Props> & {title?: string}) {
+  const {customValidation, markers, onChange, value, title} = props
 
   return (
     <Stack space={4}>
@@ -22,6 +22,7 @@ export function EditScheduleForm(props: PropsWithChildren<Props>) {
         markers={markers}
         onChange={onChange}
         value={value}
+        title={title}
       />
     </Stack>
   )
