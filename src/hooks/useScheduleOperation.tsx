@@ -3,7 +3,7 @@ import pluralize from 'pluralize'
 import React from 'react'
 import ToastDescription from '../components/toastDescription/ToastDescription'
 import {getSanityClient} from '../lib/client'
-import {Schedule} from '../types'
+import {Schedule, ScheduleAction} from '../types'
 import {debugWithName} from '../utils/debug'
 import getErrorMessage from '../utils/getErrorMessage'
 import getScheduleBaseUrl from '../utils/getScheduleBaseUrl'
@@ -75,7 +75,7 @@ function _create({
 }: {
   date: string
   documentId: string
-  action: 'publish' | 'unpublish'
+  action: ScheduleAction
 }) {
   debug('_create:', documentId)
 
@@ -146,7 +146,7 @@ export default function useScheduleOperation() {
     date: string
     displayToast?: boolean
     documentId: string
-    action?: 'publish' | 'unpublish'
+    action?: ScheduleAction
   }) {
     try {
       const data = await _create({date, documentId, action})

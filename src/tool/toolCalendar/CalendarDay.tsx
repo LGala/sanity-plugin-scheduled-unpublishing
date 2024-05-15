@@ -163,16 +163,7 @@ function TooltipContent(props: TooltipContentProps) {
 
                     return (
                       <Inline key={schedule.id} space={2}>
-                        <Box style={{width: '60px'}}>
-                          <Text size={1} weight="regular">
-                            {formatDateTz({date: new Date(executeDate), format: 'p'})}
-                          </Text>
-                        </Box>
-                        {/* HACK: Hide non unpublish schedules to maintain layout */}
-                        <Flex
-                          align="center"
-                          style={{flexShrink: 0, opacity: schedule.action === 'unpublish' ? 1 : 0}}
-                        >
+                        <Flex align="center" style={{flexShrink: 0, opacity: 1}}>
                           <Badge
                             fontSize={0}
                             mode="outline"
@@ -181,6 +172,11 @@ function TooltipContent(props: TooltipContentProps) {
                             {schedule.action}
                           </Badge>
                         </Flex>
+                        <Box style={{width: '60px'}}>
+                          <Text size={1} weight="regular">
+                            {formatDateTz({date: new Date(executeDate), format: 'p'})}
+                          </Text>
+                        </Box>
                       </Inline>
                     )
                   })}

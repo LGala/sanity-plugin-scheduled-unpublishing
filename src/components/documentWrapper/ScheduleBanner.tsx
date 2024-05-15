@@ -46,15 +46,14 @@ export function ScheduleBanner(props: Props) {
               const formattedDateTime = format(new Date(schedule.executeAt), DATE_FORMAT.LARGE)
               return (
                 <Inline key={schedule.id} space={2}>
-                  <Text muted size={1}>
-                    {formattedDateTime}
-                  </Text>
-                  {/* HACK: Hide non unpublish schedules to maintain layout */}
-                  <Flex style={{opacity: schedule.action === 'unpublish' ? 1 : 0}}>
+                  <Flex style={{opacity: 1}}>
                     <Badge fontSize={0} mode="outline">
                       {schedule.action}
                     </Badge>
                   </Flex>
+                  <Text muted size={1}>
+                    {formattedDateTime}
+                  </Text>
                 </Inline>
               )
             })}

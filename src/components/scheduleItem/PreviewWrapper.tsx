@@ -72,17 +72,15 @@ const PreviewWrapper = (props: Props) => {
             {children && <Box style={{flexBasis: 'auto', flexGrow: 1}}>{children}</Box>}
 
             {/* Badge */}
-            {schedule.action === 'unpublish' && (
-              <Flex style={{flexShrink: 0}}>
-                <Badge
-                  fontSize={0}
-                  mode="outline"
-                  tone={SCHEDULE_ACTION_DICTIONARY[schedule.action].badgeTone}
-                >
-                  {schedule.action}
-                </Badge>
-              </Flex>
-            )}
+            <Flex style={{flexShrink: 0}}>
+              <Badge
+                fontSize={0}
+                mode="outline"
+                tone={SCHEDULE_ACTION_DICTIONARY[schedule.action].badgeTone}
+              >
+                {schedule.action}
+              </Badge>
+            </Flex>
 
             {/* Schedule date */}
             <Box display={['block', 'none']} style={{flexShrink: 0, width: '90px'}}>
